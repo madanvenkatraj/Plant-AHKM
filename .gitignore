@@ -5,6 +5,8 @@ __pycache__/
 *.so
 .Python
 env/
+venv/
+ENV/
 build/
 develop/
 dist/
@@ -20,19 +22,24 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-venv/
-ENV/
 
-# Environment variables
+# Local Environment / Tooling
 .env
+pip/
+python/
+26.1.1/
+.idea/
+.vscode/
 
 # Project specific
 dataset/
 backend_error.log
 test_load.py
 test_gemini.py
+available_models.txt
 
-# Models (Keep the .h5 if you want to deploy it with git, or ignore if using LFS)
+# Models
+# Un-comment the line below if you use Git LFS or external storage
 # model/plant_disease_model.h5
 
 # OS files
