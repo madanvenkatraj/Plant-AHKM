@@ -71,7 +71,22 @@ async def root():
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "model_ready": model is not None}
+    return {
+        "status": "ok", 
+        "tensorflow_model_loaded": model is not None,
+        "gemini_api_configured": bool(GEMINI_API_KEY)
+    }
+
+@app.get("/test-gemini")
+async def test_gemini():
+    if not GEMINI_API_KEY:
+        return {"error": "GEMINI_API_KEY is missing"}
+    try:
+        model_ai = genai.GenerativeModel("gemini-1.5-flash")
+        response = model_ai.generate_content("Hello, are you working?")
+        return {"status": "success", "response": response.text}
+    except Exception as e:
+        return {"status": "failed", "error": str(e)}
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
